@@ -1,15 +1,27 @@
 /* Layout */
 
+:root {
+    --bg-color: lightskyblue;
+}
+
 body {
     margin: 0;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #f8f8f8;
+    background-color: var(--bg-color);
     color: #333;
 }
 
+.icon-container {
+    display: flex;
+	align-items: center;
+	justify-content: center;
+   min-width: 100vw; 
+   min-height: 100vh;
+  overflow:hidden;
+}
 .icon-grid {
     display: flex;
     gap: 3rem;
@@ -20,7 +32,29 @@ body {
 
 /* Icon sizing */
 
-.lucide {
-    width: 100px;
-    height: 100px;
+svg {
+    width: 40px;
+    height: 40px;
 }
+
+
+.dino {
+	display: none;
+}
+
+.earth {
+	scale: 6;
+}
+
+.explosion {
+	display: none;
+	fill: orangered;
+}
+
+.star{
+	scale: 0;
+	stroke: none;
+	fill: white;
+}
+
+

@@ -2,9 +2,9 @@
 // server side code at build time
 import Dino from './components/icon1.astro'
 import Earth from './components/icon2.astro'
-import Triangle from './components/icon3.astro'
-import Diamond from './components/icon4.astro'
-import Hexagon from './components/icon5.astro'
+import Explosion from './components/icon3.astro'
+import Meteor from './components/icon4.astro'
+import Star from './components/icon5.astro'
 // import Dino from './components/icon6.astro'
 
 import '../styles/icons.css'
@@ -21,14 +21,134 @@ import '../styles/icons.css'
 	<body>
 
 		<!-- Load icons as separate components -->
-		<div class="icon-grid">
+		<!-- <div class="icon-grid"> -->
+		 <div class="icon-container">
 			<Dino />
 			<Earth />
-			<Triangle />
-			<Diamond />
-			<Hexagon />
-			<Dino />
+			<Explosion />
+			<Meteor />
+			<Star />
 		</div>
 
 	</body>
+ <script>
+    import gsap from 'gsap';
+
+import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
+  
+gsap.registerPlugin(MotionPathPlugin);
+
+    const tl = gsap.timeline();
+
+gsap.set(".meteor", {
+	y: -10,
+	rotate: 20
+});
+
+gsap.set(".star", {
+ x: 350, y: -200
+})
+
+gsap.set(".explosion", { x: -55, y: -50, transformOrigin: "center bottom",scale: 0, rotate: -10, display: "block", autoAlpha: 0});
+
+tl
+	.fromTo(
+		".meteor",
+		{
+			x: 800,
+			y: -300,
+			scale: 6
+		},
+		{
+			x: 40,
+			y: -40,
+			duration: 1.75,
+			ease: "linear",
+			scale: 0.5
+		}
+	)
+	.to(".meteor", { opacity: 0, duration: 0.01 })
+	.to(".earth", {
+		transformOrigin: "50% 30%",
+		scale: 200,
+		duration: 0.5
+	})
+	.to(".dino", { display: "block", scale: 5, duration: 0.5 })
+	.to(".dino", {
+		duration: 0.5,
+		motionPath: {
+			path: [
+				{ x: 0, y: 0 },
+				{ x: 20, y: -25 },
+				{ x: 40, y: 0 }
+			]
+		}
+	})
+	.to(".dino", {
+		duration: 0.5,
+		delay: 0.15,
+		motionPath: {
+			path: [
+				{ x: 40, y: 0 },
+				{ x: 60, y: -25 },
+				{ x: 80, y: 0 }
+			]
+		}
+	})
+	.to(".dino", {
+		duration: 0.5,
+		delay: 0.2,
+		motionPath: {
+			path: [
+				{ x: 80, y: 0 },
+				{ x: 100, y: -25 },
+				{ x: 120, y: 0 }
+			]
+		}
+	})
+	.to("body", { backgroundColor: "#333", duration: 1 }, "-=0.5")
+.to(".star", {
+	scale: 6, rotation: 540, ease: "power1.in", duration: 0.75, repeat: 1, yoyo: true
+}, "-=0.6")
+	.to("body", { backgroundColor: "var(--bg-color)", duration: 0.5 })
+	.to(".earth", { y: -30, scale: 6 }, "<")
+	.to(".dino", { scale: 0, duration: 0.3 }, "<")
+	.to(
+		".explosion",
+	 { delay: 0.35,
+		autoAlpha:1,		 
+			scale: 2.5,
+			duration: 0.4, ease: "power2.out"
+		})
+.to(".explosion", {opacity: 0, scale: 3.5, ease: "power2", duration: 0.3}, "-=0.18");
+
+
+		// const earth = document.querySelector(".earth");
+		// earth.addEventListener('mouseenter', () => {
+
+		// });
+
+    // Hover animations
+	/*
+    diamond.addEventListener('mouseenter', () => {
+        gsap.to('#theDiamond path', {
+            rotation: 45,
+            transformOrigin: 'center',
+            duration: 0.4,
+            ease: 'power2.out'
+        });
+    });
+
+    diamond.addEventListener('mouseleave', () => {
+        gsap.to('#theDiamond path', {
+            rotation: 0,
+            transformOrigin: 'center',
+            duration: 0.4,
+            ease: 'power2.in'
+        });
+    });
+	*/
+</script> 
+
+
 </html>
