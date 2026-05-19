@@ -1,7 +1,7 @@
 /* Layout */
 
 :root {
-    --bg-color: lightskyblue;
+    --bg-color: rgb(248, 245, 243);
 }
 
 body {
@@ -15,12 +15,16 @@ body {
 }
 
 .icon-container {
-    display: flex;
-	align-items: center;
-	justify-content: center;
+      position: relative;
    min-width: 100vw; 
    min-height: 100vh;
   overflow:hidden;
+}
+.icon-container > * {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .icon-grid {
     display: flex;
@@ -43,7 +47,7 @@ svg {
 }
 
 .earth {
-	scale: 6;
+    transform-origin: 50% 33%; 
 }
 
 .explosion {

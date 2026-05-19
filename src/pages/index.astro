@@ -39,18 +39,11 @@ import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
 gsap.registerPlugin(MotionPathPlugin);
 
 
-const earthStart = {
-  x: gsap.getProperty(".earth", "x"),
-  y: gsap.getProperty(".earth", "y"),
-  scale: gsap.getProperty(".earth", "scale"),
-  transformOrigin: "50% 30%" // match your CSS default
-};
+
 
     const tl = gsap.timeline({
 		 paused: true,
-    onComplete: () => tl.pause(0)
 	});
-	tl.pause();
 
 gsap.set(".meteor", {
 	y: -10,
@@ -61,7 +54,10 @@ gsap.set(".star", {
  x: 350, y: -200
 })
 
-gsap.set(".explosion", { x: -55, y: -50, transformOrigin: "center bottom",scale: 0, rotate: -10, display: "block", autoAlpha: 0});
+gsap.set(".explosion", { x: -35, y: -50, transformOrigin: "center bottom",scale: 0, rotate: -10, display: "block", autoAlpha: 0});
+
+gsap.set(".earth", { transformOrigin: "50% 33%", scale: 6 });
+
 
 tl
 	.fromTo(
@@ -81,10 +77,10 @@ tl
 	)
 	.to(".meteor", { opacity: 0, duration: 0.01 })
 	.to(".earth", {
-		transformOrigin: "50% 30%",
 		scale: 200,
-		duration: 0.5
+		duration: 0.5, 
 	})
+	.set(".dino", { x: 0, y: 0 })
 	.to(".dino", { display: "block", scale: 5, duration: 0.5 })
 	.to(".dino", {
 		duration: 0.5,
@@ -123,7 +119,7 @@ tl
 	scale: 6, rotation: 540, ease: "power1.in", duration: 0.75, repeat: 1, yoyo: true
 }, "-=0.6")
 	.to("body", { backgroundColor: "var(--bg-color)", duration: 0.5 })
-.to(".earth", { x: earthStart.x, y: earthStart.y, scale: earthStart.scale }, "<")
+.to(".earth", {  scale: 6 }, "<")
 	.to(".dino", { scale: 0, duration: 0.3 }, "<")
 	.to(
 		".explosion",
@@ -132,18 +128,18 @@ tl
 			scale: 2.5,
 			duration: 0.4, ease: "power2.out"
 		})
-.to(".explosion", {opacity: 0, scale: 3.5, ease: "power2", duration: 0.3}, "-=0.18");
+.to(".explosion", {opacity: 0, scale: 3.5, ease: "power2", duration: 0.3}, "-=0.18")
 
 
 // Hover animations
 		const earth = document.querySelector(".earth");
-
-		if (earth) {
-			earth.addEventListener('mouseenter', () => {
-				tl.restart();
-			});
-		}
-
+if (earth) {
+  earth.addEventListener('mouseenter', () => {
+    if (tl.progress() === 1 || tl.paused()) {
+      tl.play(0);
+    }
+  });
+}
 	
 </script> 
 
