@@ -49,6 +49,7 @@ svg {
 .explosion {
 	display: none;
 	fill: orangered;
+    z-index: 3;
 }
 
 .star{

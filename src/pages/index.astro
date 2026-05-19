@@ -38,7 +38,19 @@ import { MotionPathPlugin } from 'gsap/MotionPathPlugin';
   
 gsap.registerPlugin(MotionPathPlugin);
 
-    const tl = gsap.timeline();
+
+const earthStart = {
+  x: gsap.getProperty(".earth", "x"),
+  y: gsap.getProperty(".earth", "y"),
+  scale: gsap.getProperty(".earth", "scale"),
+  transformOrigin: "50% 30%" // match your CSS default
+};
+
+    const tl = gsap.timeline({
+		 paused: true,
+    onComplete: () => tl.pause(0)
+	});
+	tl.pause();
 
 gsap.set(".meteor", {
 	y: -10,
@@ -111,7 +123,7 @@ tl
 	scale: 6, rotation: 540, ease: "power1.in", duration: 0.75, repeat: 1, yoyo: true
 }, "-=0.6")
 	.to("body", { backgroundColor: "var(--bg-color)", duration: 0.5 })
-	.to(".earth", { y: -30, scale: 6 }, "<")
+.to(".earth", { x: earthStart.x, y: earthStart.y, scale: earthStart.scale }, "<")
 	.to(".dino", { scale: 0, duration: 0.3 }, "<")
 	.to(
 		".explosion",
@@ -123,31 +135,16 @@ tl
 .to(".explosion", {opacity: 0, scale: 3.5, ease: "power2", duration: 0.3}, "-=0.18");
 
 
-		// const earth = document.querySelector(".earth");
-		// earth.addEventListener('mouseenter', () => {
+// Hover animations
+		const earth = document.querySelector(".earth");
 
-		// });
+		if (earth) {
+			earth.addEventListener('mouseenter', () => {
+				tl.restart();
+			});
+		}
 
-    // Hover animations
-	/*
-    diamond.addEventListener('mouseenter', () => {
-        gsap.to('#theDiamond path', {
-            rotation: 45,
-            transformOrigin: 'center',
-            duration: 0.4,
-            ease: 'power2.out'
-        });
-    });
-
-    diamond.addEventListener('mouseleave', () => {
-        gsap.to('#theDiamond path', {
-            rotation: 0,
-            transformOrigin: 'center',
-            duration: 0.4,
-            ease: 'power2.in'
-        });
-    });
-	*/
+	
 </script> 
 
 
