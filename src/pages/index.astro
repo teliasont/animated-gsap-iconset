@@ -63,23 +63,24 @@ tl
 	.fromTo(
 		".meteor",
 		{
-			x: 800,
+			x: 2500,
 			y: -300,
-			scale: 6
+			scale: 10,
 		},
 		{
 			x: 40,
 			y: -40,
-			duration: 1.75,
+			duration: 2,
 			ease: "linear",
 			scale: 0.5
 		}
 	)
 	.to(".meteor", { opacity: 0, duration: 0.01 })
 	.to(".earth", {
-		scale: 200,
-		duration: 0.5, 
+		scale: 400,
+		duration: 0.5
 	})
+	// .to(".earth", {autoAlpha: 0, duration: 0.01}, "-=0.1")
 	.set(".dino", { x: 0, y: 0 })
 	.to(".dino", { display: "block", scale: 5, duration: 0.5 })
 	.to(".dino", {
@@ -119,7 +120,7 @@ tl
 	scale: 6, rotation: 540, ease: "power1.in", duration: 0.75, repeat: 1, yoyo: true
 }, "-=0.6")
 	.to("body", { backgroundColor: "var(--bg-color)", duration: 0.5 })
-.to(".earth", {  scale: 6 }, "<")
+.to(".earth", {  scale: 6 , duration: 0.5}, "<")
 	.to(".dino", { scale: 0, duration: 0.3 }, "<")
 	.to(
 		".explosion",
